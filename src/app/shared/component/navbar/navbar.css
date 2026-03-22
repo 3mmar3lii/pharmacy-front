@@ -1,0 +1,12 @@
+
+nav a,
+nav .nav-link
+{
+  color: #111f59;
+}
+
+
+nav form input{
+  background-color: rgb(230, 225, 225);
+  border: none;
+}

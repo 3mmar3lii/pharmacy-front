@@ -1,20 +1,26 @@
 import { Routes } from '@angular/router';
+import { User } from './core/layout/user-layout/user';
+import { Home } from './feature/home/component/home/home';
+import { ProductList } from './feature/product/component/product-list/product-list';
+import { NotFound } from './core/auth/component/not-found/not-found';
+import { ProductDetails } from './feature/product/component/product-details/product-details';
 
 export const routes: Routes = [
   {
-    path: '',
+    path: '', 
     loadComponent: () => import('./auth/auth-layout/auth-layout.component').then(m => m.AuthLayoutComponent),
     children: [
-      { path: '', redirectTo: 'login', pathMatch: 'full' },
-      { 
-        path: 'login', 
-        loadComponent: () => import('./auth/login/login.component').then(m => m.LoginComponent)
-      },
-      { 
-        path: 'register', 
-        loadComponent: () => import('./auth/register/register.component').then(m => m.RegisterComponent)
-      }
-    ]
+      { path: 'login', loadComponent: () => import('./auth/login/login.component').then(m => m.LoginComponent) },
+      { path: 'register', loadComponent: () => import('./auth/register/register.component').then(m => m.RegisterComponent) },
+    ],
   },
-  { path: '**', redirectTo: 'login' }
+  {
+    path: '', component: User, children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'home', component: Home },
+      { path: 'product', component: ProductList },
+      { path: 'product-details/:id', component: ProductDetails },
+      { path: '**', component: NotFound },
+    ],
+  },
 ];

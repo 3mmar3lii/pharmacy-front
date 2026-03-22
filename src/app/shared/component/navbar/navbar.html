@@ -1,0 +1,51 @@
+<nav class="navbar navbar-expand-lg bg-white">
+  <div class="container">
+
+    <a routerLink="/home" class="navbar-brand fw-bold fs-3">Pharmacy</a>
+
+    @if (layout == 'auth') {
+    <div class="d-flex">
+      <a routerLink="/Login" class="text-decoration-none me-4" aria-current="page">Login</a>
+      <a routerLink="/Register" class="text-decoration-none">Register</a>
+    </div>
+
+    } @else {
+    <div class="d-flex align-items-center">
+      <form class="me-2">
+        <input class="form-control rounded-pill" type="search" placeholder="Search" aria-label="Search" />
+      </form>
+
+      <div class="collapse navbar-collapse " id="navbarSupportedContent">
+        <ul class="navbar-nav mx-5 border border-light px-2">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              En
+            </a>
+            <ul class="dropdown-menu mt-2 bg-dark border border-light mx-3" aria-labelledby="navbarDropdown">
+              <li><a routerLink="/" class="dropdown-item">EN</a></li>
+              <li><a routerLink="/" class="dropdown-item ">AR</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/product" class="nav-link active" aria-current="page">Product</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/Wishlist" class="nav-link">Wishlist</a>
+          </li>
+        </ul>
+      </div>
+
+      <a routerLink="/cart" class="text-decoration-none mx-2">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <p class="m-0">cart</p>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon "></span>
+      </button>
+    </div>
+    }
+  </div>
+</nav>
