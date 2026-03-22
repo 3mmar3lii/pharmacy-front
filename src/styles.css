@@ -65,7 +65,7 @@ a {
 }
 
 /* Base button */
-.btn-primary {
+.auth-btn-primary {
   width: 100%;
   padding: 12px;
   border-radius: 20px;
@@ -79,11 +79,11 @@ a {
   font-family: inherit;
 }
 
-.btn-primary:hover {
+.auth-btn-primary:hover {
   opacity: 0.9;
 }
 
-.btn-navy {
+.auth-btn-navy {
   background-color: #0f172a; /* standard dark slate navy */
   color: var(--bg-white);
   border-radius: 20px;
@@ -94,7 +94,7 @@ a {
   cursor: pointer;
 }
 
-.btn-outline {
+.auth-btn-outline {
   width: 100%;
   padding: 12px;
   border-radius: 20px;
@@ -111,6 +111,6 @@ a {
   align-items: center;
 }
 
-.btn-outline:hover {
+.auth-btn-outline:hover {
   background-color: var(--bg-light);
 }

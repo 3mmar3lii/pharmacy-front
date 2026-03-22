@@ -15,33 +15,33 @@
       </div>
 
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-        <div class="input-group">
+        <div class="auth-input-group">
           <label class="input-label">{{ currentLang === 'ar' ? 'اسم الصيدلية' : 'Pharmacy Name' }}</label>
           <input type="text" formControlName="pharmacyName" />
         </div>
 
-        <div class="input-group">
+        <div class="auth-input-group">
           <label class="input-label">{{ currentLang === 'ar' ? 'اسم مالك الصيدلية' : 'Pharmacy Owner\'s Name' }}</label>
           <input type="text" formControlName="ownerName" />
         </div>
 
         <div class="row-inputs">
-          <div class="input-group half">
+          <div class="auth-input-group half">
             <label class="input-label">{{ currentLang === 'ar' ? 'رقم whatsapp' : 'WhatsApp Number' }}</label>
             <input type="text" formControlName="whatsapp" />
           </div>
-          <div class="input-group half">
+          <div class="auth-input-group half">
             <label class="input-label">{{ currentLang === 'ar' ? 'رقم الارضى اختيارى' : 'Pharmacy Landline Number (Optional)' }}</label>
             <input type="text" formControlName="landline" />
           </div>
         </div>
 
-        <div class="input-group">
+        <div class="auth-input-group">
           <label class="input-label">{{ currentLang === 'ar' ? 'البريد الالكتروني' : 'Email' }}</label>
           <input type="email" formControlName="email" />
         </div>
 
-        <div class="input-group">
+        <div class="auth-input-group">
           <label class="input-label">{{ currentLang === 'ar' ? 'نوع الصيدلية' : 'Pharmacy Type' }}</label>
           <select formControlName="pharmacyType" class="custom-select">
             <option value="Individual">{{ currentLang === 'ar' ? 'افراد' : 'Individual' }}</option>
@@ -49,12 +49,12 @@
           </select>
         </div>
 
-        <div class="input-group">
+        <div class="auth-input-group">
           <label class="input-label">{{ currentLang === 'ar' ? 'كلمة السر' : 'Password' }}</label>
           <input type="password" formControlName="password" />
         </div>
 
-        <div class="input-group">
+        <div class="auth-input-group">
           <label class="input-label">{{ currentLang === 'ar' ? 'تأكيد كلمة السر' : 'Re-type Password' }}</label>
           <input type="password" formControlName="confirmPassword" />
         </div>
@@ -63,7 +63,7 @@
           <button type="button" class="btn-cancel" (click)="onCancel()">
             {{ currentLang === 'ar' ? 'الغاء' : 'Cancel' }}
           </button>
-          <button type="submit" class="btn-navy">
+          <button type="submit" class="auth-btn-navy">
             {{ currentLang === 'ar' ? 'التالي' : 'Next' }}
           </button>
         </div>

@@ -20,12 +20,12 @@
         </div>
 
         <div class="auth-tabs" *ngIf="currentLang === 'ar'">
-          <a routerLink="/login" class="tab" [class.active]="isLogin">تسجيل الدخول</a>
-          <a routerLink="/register" class="tab" [class.active]="!isLogin">{{ isLogin ? 'افتح حساب جديد' : 'بيانات الاتصال' }}</a>
+          <a routerLink="/login" class="auth-tab" [class.active]="isLogin">تسجيل الدخول</a>
+          <a routerLink="/register" class="auth-tab" [class.active]="!isLogin">{{ isLogin ? 'افتح حساب جديد' : 'بيانات الاتصال' }}</a>
         </div>
         <div class="auth-tabs" *ngIf="currentLang === 'en'">
-          <a routerLink="/login" class="tab" [class.active]="isLogin">Sign In</a>
-          <a routerLink="/register" class="tab" [class.active]="!isLogin">Sign Up</a>
+          <a routerLink="/login" class="auth-tab" [class.active]="isLogin">Sign In</a>
+          <a routerLink="/register" class="auth-tab" [class.active]="!isLogin">Sign Up</a>
         </div>
       </div>
 

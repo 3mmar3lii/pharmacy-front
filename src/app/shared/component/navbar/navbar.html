@@ -1,51 +1,51 @@
-<nav class="navbar navbar-expand-lg bg-white">
-  <div class="container">
-
-    <a routerLink="/home" class="navbar-brand fw-bold fs-3">Pharmacy</a>
-
-    @if (layout == 'auth') {
-    <div class="d-flex">
-      <a routerLink="/Login" class="text-decoration-none me-4" aria-current="page">Login</a>
-      <a routerLink="/Register" class="text-decoration-none">Register</a>
-    </div>
-
-    } @else {
-    <div class="d-flex align-items-center">
-      <form class="me-2">
-        <input class="form-control rounded-pill" type="search" placeholder="Search" aria-label="Search" />
-      </form>
-
-      <div class="collapse navbar-collapse " id="navbarSupportedContent">
-        <ul class="navbar-nav mx-5 border border-light px-2">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              En
-            </a>
-            <ul class="dropdown-menu mt-2 bg-dark border border-light mx-3" aria-labelledby="navbarDropdown">
-              <li><a routerLink="/" class="dropdown-item">EN</a></li>
-              <li><a routerLink="/" class="dropdown-item ">AR</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a routerLink="/product" class="nav-link active" aria-current="page">Product</a>
-          </li>
-          <li class="nav-item">
-            <a routerLink="/Wishlist" class="nav-link">Wishlist</a>
-          </li>
-        </ul>
-      </div>
-
-      <a routerLink="/cart" class="text-decoration-none mx-2">
-        <i class="fa-solid fa-cart-shopping"></i>
-        <p class="m-0">cart</p>
+<nav class="custom-navbar bg-white py-3 border-bottom" dir="ltr">
+  <div class="container d-flex flex-wrap align-items-center justify-content-between">
+    
+    <!-- Left Group (Logo + Actions) -->
+    <div class="d-flex align-items-center gap-4 gap-lg-5 mb-3 mb-lg-0">
+      
+      <!-- Logo -->
+      <a routerLink="/home" class="brand-logo text-decoration-none">
+        <img src="image.png" alt="Pharmacy Marts" class="logo-img">
       </a>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon "></span>
-      </button>
+      <!-- Actions -->
+      <div class="d-flex align-items-center gap-4 gap-md-5">
+        
+        <!-- Cart -->
+        <a routerLink="/cart" class="nav-action-item text-decoration-none">
+          <i class="fa-solid fa-cart-shopping nav-icon"></i>
+          <span class="action-text" [dir]="currentLang === 'ar' ? 'rtl' : 'ltr'">{{ currentLang === 'ar' ? 'العربة' : 'Cart' }}</span>
+        </a>
+
+        <!-- User Login -->
+        <a routerLink="/login" class="nav-action-item text-decoration-none">
+          <i class="fa-solid fa-user nav-icon"></i>
+          <span class="action-text" [dir]="currentLang === 'ar' ? 'rtl' : 'ltr'">{{ currentLang === 'ar' ? 'تسجيل الدخول' : 'Sign In' }}</span>
+        </a>
+
+        <!-- Language Toggle -->
+        <div class="nav-action-item pointer" (click)="toggleLang()" style="cursor: pointer;">
+          <span class="lang-text">{{ currentLang === 'ar' ? 'EN' : 'AR' }}</span>
+          <i class="fa-solid fa-chevron-down chevron-icon"></i>
+        </div>
+
+      </div>
     </div>
-    }
+
+    <!-- Center/Right Nav Links -->
+    <div class="d-flex align-items-center gap-4 ms-auto me-4 fw-bold">
+      <a routerLink="/product" class="text-decoration-none text-dark">Product</a>
+      <a routerLink="/Wishlist" class="text-decoration-none text-dark">Wishlist</a>
+    </div>
+
+    <!-- Right Group (Search Bar) -->
+    <div class="search-container">
+      <div class="search-box position-relative" [dir]="currentLang === 'ar' ? 'rtl' : 'ltr'">
+        <input type="text" class="form-control rounded-pill search-input" [placeholder]="currentLang === 'ar' ? 'إبحث' : 'Search'">
+        <i class="fa-solid fa-magnifying-glass search-icon position-absolute top-50 translate-middle-y"></i>
+      </div>
+    </div>
+
   </div>
 </nav>

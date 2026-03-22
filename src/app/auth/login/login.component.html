@@ -4,12 +4,12 @@
   </div>
 
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div class="input-group">
+    <div class="auth-input-group">
       <label class="input-label">{{ currentLang === 'ar' ? 'رقم الموبايل او البريد الإلكتروني' : 'Email/Phone Number' }}</label>
       <input type="text" formControlName="username" />
     </div>
 
-    <div class="input-group">
+    <div class="auth-input-group">
       <label class="input-label">{{ currentLang === 'ar' ? 'كلمة السر' : 'Password' }}</label>
       <input type="password" formControlName="password" />
       <div class="forgot-password text-end mt-2">
@@ -17,7 +17,7 @@
       </div>
     </div>
 
-    <button type="submit" class="btn-primary mt-4" [disabled]="!loginForm.valid">
+    <button type="submit" class="auth-btn-primary mt-4" [disabled]="!loginForm.valid">
       {{ currentLang === 'ar' ? 'تسجيل الدخول' : 'Sign In' }}
     </button>
   </form>
@@ -26,7 +26,7 @@
     <span>{{ currentLang === 'ar' ? 'أو' : 'Or' }}</span>
   </div>
 
-  <button type="button" class="btn-outline">
+  <button type="button" class="auth-btn-outline">
     {{ currentLang === 'ar' ? 'متابعة كضيف' : 'Continue as Guest' }}
   </button>
 </div>
