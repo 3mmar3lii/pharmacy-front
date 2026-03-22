@@ -1,0 +1,75 @@
+.form-container {
+  width: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-end {
+  text-align: end;
+}
+
+.mb-8 {
+  margin-bottom: 40px;
+}
+
+.mt-2 {
+  margin-top: 8px;
+}
+
+.mt-4 {
+  margin-top: 15px;
+}
+
+.auth-title {
+  color: var(--dark-navy);
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.input-group {
+  margin-bottom: 25px;
+}
+
+.input-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--dark-navy);
+  margin-bottom: 8px;
+}
+
+.forgot-password a {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--primary-cyan);
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: var(--border-medium);
+  margin: 30px 0;
+  font-size: 14px;
+}
+
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.divider span {
+  padding: 0 15px;
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

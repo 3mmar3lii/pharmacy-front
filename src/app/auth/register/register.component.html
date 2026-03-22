@@ -1,0 +1,73 @@
+<div class="register-container fade-in">
+  <div class="register-layout">
+    <div class="steps-indicator">
+      <div class="step" [class.active]="currentStep >= 1"><span>{{ currentLang === 'ar' ? '١' : '1' }}</span></div>
+      <div class="step-line"></div>
+      <div class="step" [class.active]="currentStep >= 2"><span>{{ currentLang === 'ar' ? '٢' : '2' }}</span></div>
+      <div class="step-line"></div>
+      <div class="step" [class.active]="currentStep >= 3"><span>{{ currentLang === 'ar' ? '٣' : '3' }}</span></div>
+    </div>
+
+    <div class="form-content">
+      <div class="text-start mb-6">
+        <h1 class="auth-title">{{ currentLang === 'ar' ? 'إنشاء حساب جديد' : 'Create a New Account' }}</h1>
+        <p class="subtitle">{{ currentLang === 'ar' ? 'بيانات الاتصال' : 'Contact Information' }}</p>
+      </div>
+
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="input-group">
+          <label class="input-label">{{ currentLang === 'ar' ? 'اسم الصيدلية' : 'Pharmacy Name' }}</label>
+          <input type="text" formControlName="pharmacyName" />
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">{{ currentLang === 'ar' ? 'اسم مالك الصيدلية' : 'Pharmacy Owner\'s Name' }}</label>
+          <input type="text" formControlName="ownerName" />
+        </div>
+
+        <div class="row-inputs">
+          <div class="input-group half">
+            <label class="input-label">{{ currentLang === 'ar' ? 'رقم whatsapp' : 'WhatsApp Number' }}</label>
+            <input type="text" formControlName="whatsapp" />
+          </div>
+          <div class="input-group half">
+            <label class="input-label">{{ currentLang === 'ar' ? 'رقم الارضى اختيارى' : 'Pharmacy Landline Number (Optional)' }}</label>
+            <input type="text" formControlName="landline" />
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">{{ currentLang === 'ar' ? 'البريد الالكتروني' : 'Email' }}</label>
+          <input type="email" formControlName="email" />
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">{{ currentLang === 'ar' ? 'نوع الصيدلية' : 'Pharmacy Type' }}</label>
+          <select formControlName="pharmacyType" class="custom-select">
+            <option value="Individual">{{ currentLang === 'ar' ? 'افراد' : 'Individual' }}</option>
+            <option value="Company">{{ currentLang === 'ar' ? 'شركة' : 'Company' }}</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">{{ currentLang === 'ar' ? 'كلمة السر' : 'Password' }}</label>
+          <input type="password" formControlName="password" />
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">{{ currentLang === 'ar' ? 'تأكيد كلمة السر' : 'Re-type Password' }}</label>
+          <input type="password" formControlName="confirmPassword" />
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn-cancel" (click)="onCancel()">
+            {{ currentLang === 'ar' ? 'الغاء' : 'Cancel' }}
+          </button>
+          <button type="submit" class="btn-navy">
+            {{ currentLang === 'ar' ? 'التالي' : 'Next' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
