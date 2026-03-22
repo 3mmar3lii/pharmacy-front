@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../../services/products';
 import { Product } from '../../models/products';
@@ -10,40 +10,35 @@ import { Product } from '../../models/products';
   styleUrl: './product-details.css',
 })
   
-export class ProductDetails {
+export class ProductDetails implements OnInit {
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly productsService = inject(ProductsService);
+  private readonly cdr = inject(ChangeDetectorRef);
 
   productID!: string | null;
   productDetails: Product = {} as Product;
 
-  getproductID() {
-    // get the id from url (1)
+  ngOnInit(): void {
+    // get the id from url asynchronously, then fetch product data
     this.activatedRoute.paramMap.subscribe({
       next: (urlData) => {
-        console.log(urlData.get('id'));
         this.productID = urlData.get('id');
+        this.getproductDetails(this.productID);
       },
       error: (err) => {
         console.log(err);
       },
     });
-
-    // get the id from url (2)
-    // console.log(this.activatedRoute.snapshot.params['id']);
   }
 
   getproductDetails(id: string | null) {
+    if (!id) return;
     this.productsService.getProductDetails(id).subscribe({
       next: (res) => {
         console.log(res.data);
         this.productDetails = res.data;
+        this.cdr.detectChanges(); // force UI update mapping
       },
     });
-  }
-
-  ngOnInit(): void {
-    this.getproductID();
-    this.getproductDetails(this.productID);
   }
 }

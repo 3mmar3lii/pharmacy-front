@@ -9,5 +9,9 @@ import { RouterLink } from "@angular/router";
 })
 export class Navbar {
   @Input() layout!: string;
+  currentLang: 'en' | 'ar' = 'ar';
 
+  toggleLang() {
+    this.currentLang = this.currentLang === 'en' ? 'ar' : 'en';
+  }
 }

@@ -1,4 +1,116 @@
-/* You can add global styles to this file, and also import other style files */
-body{
-  background-color: rgb(238, 235, 235);
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* New Colors matching UI */
+  --primary-cyan: #00d084;
+  --dark-navy: #1e1b4b; /* for text and next button */
+  --text-dark: #1e293b;
+  --text-medium: #475569;
+  --text-light: #94a3b8;
+  
+  --bg-white: #FFFFFF;
+  --bg-light: #f8fafc;
+  
+  --border-light: #e2e8f0;
+  --border-medium: #cbd5e1;
+
+  --auth-gradient-start: #2A4387;
+  --auth-gradient-end: #13C296;
+
+  --font-en: 'Inter', sans-serif;
+  --font-ar: 'Cairo', sans-serif;
+}
+
+[dir="ltr"] { font-family: var(--font-en); }
+[dir="rtl"] { font-family: var(--font-ar); }
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-en);
+  color: var(--text-dark);
+  background-color: var(--bg-light);
+  -webkit-font-smoothing: antialiased;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--text-dark);
+  outline: none;
+  transition: border-color 0.2s;
+  background-color: #fbfbfb; /* slight off-white for inputs if needed, or white */
+}
+
+input:focus, select:focus {
+  border-color: var(--primary-cyan);
+  background-color: white;
+}
+
+input::placeholder {
+  color: var(--text-light);
+}
+
+a {
+  text-decoration: none;
+  color: var(--primary-cyan);
+}
+
+/* Base button */
+.auth-btn-primary {
+  width: 100%;
+  padding: 12px;
+  border-radius: 20px;
+  background-color: var(--primary-cyan);
+  color: var(--bg-white);
+  border: none;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  font-family: inherit;
+}
+
+.auth-btn-primary:hover {
+  opacity: 0.9;
+}
+
+.auth-btn-navy {
+  background-color: #0f172a; /* standard dark slate navy */
+  color: var(--bg-white);
+  border-radius: 20px;
+  padding: 12px 40px;
+  font-weight: 600;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+}
+
+.auth-btn-outline {
+  width: 100%;
+  padding: 12px;
+  border-radius: 20px;
+  background-color: transparent;
+  color: var(--dark-navy);
+  border: 1px solid var(--dark-navy);
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-btn-outline:hover {
+  background-color: var(--bg-light);
 }

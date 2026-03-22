@@ -1,0 +1,32 @@
+<div class="form-container fade-in">
+  <div class="text-center mb-8">
+    <h1 class="auth-title">{{ currentLang === 'ar' ? 'مرحبا بك مجددا!' : 'Welcome Back!' }}</h1>
+  </div>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="auth-input-group">
+      <label class="input-label">{{ currentLang === 'ar' ? 'رقم الموبايل او البريد الإلكتروني' : 'Email/Phone Number' }}</label>
+      <input type="text" formControlName="username" />
+    </div>
+
+    <div class="auth-input-group">
+      <label class="input-label">{{ currentLang === 'ar' ? 'كلمة السر' : 'Password' }}</label>
+      <input type="password" formControlName="password" />
+      <div class="forgot-password text-end mt-2">
+        <a href="javascript:void(0)">{{ currentLang === 'ar' ? 'نسيت كلمة السر؟' : 'Forgot Password?' }}</a>
+      </div>
+    </div>
+
+    <button type="submit" class="auth-btn-primary mt-4" [disabled]="!loginForm.valid">
+      {{ currentLang === 'ar' ? 'تسجيل الدخول' : 'Sign In' }}
+    </button>
+  </form>
+
+  <div class="divider">
+    <span>{{ currentLang === 'ar' ? 'أو' : 'Or' }}</span>
+  </div>
+
+  <button type="button" class="auth-btn-outline">
+    {{ currentLang === 'ar' ? 'متابعة كضيف' : 'Continue as Guest' }}
+  </button>
+</div>
