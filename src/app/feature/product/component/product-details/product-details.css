@@ -1,0 +1,9 @@
+.card-title{
+  color: #111f59;
+}
+button{
+  background-color: rgb(1, 2, 53);
+}
+button:hover{
+  background-color: #111f59;
+}

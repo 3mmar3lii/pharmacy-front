@@ -1,0 +1,14 @@
+<div [routerLink]="['/product-details',product._id]" class="card rounded-5 mt-3 p-2 bg-white">
+
+
+  <!-- <div routerLink="/product-details/{{product._id}}" class="card rounded-5 mt-3 p-2"> -->
+  <img [src]="product.imageCover" class="card-img-top img-fluid" alt="product.title">
+  <div class="card-body">
+    <h5 class="card-title">{{product.category.name}}</h5>
+    <!-- <div class="overflow-hidden"> -->
+          <p class="card-text">{{product.title}}</p>
+    <!-- </div> -->
+    <span class="fw-bold">{{product.price}} EGP</span>
+    <button type="button" class="btn rounded-pill w-100 mt-2 text-white">add to cart</button>
+  </div>
+</div>

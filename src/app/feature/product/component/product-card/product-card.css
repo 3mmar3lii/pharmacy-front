@@ -1,0 +1,30 @@
+/* .card {
+  border: none;
+  transition: border 1s ease;
+  overflow: hidden;
+}
+
+.card:hover {
+  border: 1px solid gray;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.548);
+}
+
+.card .btn {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all .8s ease;
+}
+
+.card:hover .btn {
+  opacity: 1;
+  transform: translateY(0);
+} */
+.card-title{
+  color: #111f59;
+}
+button{
+  background-color: rgb(1, 2, 53);
+}
+button:hover{
+  background-color: #111f59;
+}
