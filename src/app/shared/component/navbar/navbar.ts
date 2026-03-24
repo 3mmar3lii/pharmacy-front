@@ -8,8 +8,8 @@ import { RouterLink } from "@angular/router";
   styleUrl: './navbar.css',
 })
 export class Navbar {
-  @Input() layout!: string;
-  currentLang: 'en' | 'ar' = 'ar';
+@Input() layout!: string;
+currentLang: 'en' | 'ar' = 'ar';
 
   toggleLang() {
     this.currentLang = this.currentLang === 'en' ? 'ar' : 'en';

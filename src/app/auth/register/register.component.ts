@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { AuthLayoutComponent } from '../auth-layout/auth-layout.component';
 
@@ -14,7 +14,7 @@ import { AuthLayoutComponent } from '../auth-layout/auth-layout.component';
 export class RegisterComponent {
   private fb = inject(FormBuilder);
   private router = inject(Router);
-  
+
   private layout = inject(AuthLayoutComponent, { optional: true });
 
   get currentLang() {
