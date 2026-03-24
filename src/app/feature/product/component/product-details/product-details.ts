@@ -9,14 +9,15 @@ import { Product } from '../../models/products';
   templateUrl: './product-details.html',
   styleUrl: './product-details.css',
 })
-  
+
 export class ProductDetails implements OnInit {
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly productsService = inject(ProductsService);
-  private readonly cdr = inject(ChangeDetectorRef);
+  private readonly changeDetectorRef= inject(ChangeDetectorRef);
 
   productID!: string | null;
   productDetails: Product = {} as Product;
+  cdr: any;
 
   ngOnInit(): void {
     // get the id from url asynchronously, then fetch product data
@@ -32,12 +33,11 @@ export class ProductDetails implements OnInit {
   }
 
   getproductDetails(id: string | null) {
-    if (!id) return;
     this.productsService.getProductDetails(id).subscribe({
       next: (res) => {
         console.log(res.data);
         this.productDetails = res.data;
-        this.cdr.detectChanges(); // force UI update mapping
+        this.changeDetectorRef.detectChanges(); // force UI update mapping
       },
     });
   }

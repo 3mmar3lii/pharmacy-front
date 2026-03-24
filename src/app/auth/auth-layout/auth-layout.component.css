@@ -32,9 +32,9 @@
 .illustration-img {
   width: 100%;
   height: 100%;
-  max-width: 90%; 
-  max-height: 90%; 
-  object-fit: contain; 
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
 }
 
 .auth-form-side {
@@ -115,7 +115,7 @@
   padding: 8px 24px;
   font-size: 13px;
   font-weight: 600;
-  color: white; 
+  color: white;
   background-color: #d1d5db;
   text-decoration: none;
   transition: all 0.3s;

@@ -7,7 +7,7 @@ import { ProductDetails } from './feature/product/component/product-details/prod
 
 export const routes: Routes = [
   {
-    path: '', 
+    path: '',
     loadComponent: () => import('./auth/auth-layout/auth-layout.component').then(m => m.AuthLayoutComponent),
     children: [
       { path: '', redirectTo: 'login', pathMatch: 'full' },
