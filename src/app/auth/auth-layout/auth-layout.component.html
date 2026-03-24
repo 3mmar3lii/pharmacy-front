@@ -1,16 +1,18 @@
 <div class="auth-wrapper">
   <div class="auth-card">
     <div class="auth-illustration-side">
-      <img [src]="isLogin ? '/login-illustration.png' : '/register-illustration.png'" alt="Illustration" class="illustration-img" />
+      <img [src]="isLogin ? '/login-illustration.png' : '/register-illustration.png'" alt="Illustration"
+        class="illustration-img" />
     </div>
-    
+
     <div class="auth-form-side">
       <div class="auth-header">
         <div class="lang-dropdown-container">
           <button class="lang-toggle" (click)="toggleDropdown()">
             {{ currentLang === 'ar' ? 'AR' : 'EN' }}
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-               <polyline points="6 9 12 15 18 9"></polyline>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
             </svg>
           </button>
           <div class="lang-dropdown-menu" *ngIf="isDropdownOpen">
@@ -21,7 +23,8 @@
 
         <div class="auth-tabs" *ngIf="currentLang === 'ar'">
           <a routerLink="/login" class="auth-tab" [class.active]="isLogin">تسجيل الدخول</a>
-          <a routerLink="/register" class="auth-tab" [class.active]="!isLogin">{{ isLogin ? 'افتح حساب جديد' : 'بيانات الاتصال' }}</a>
+          <a routerLink="/register" class="auth-tab"
+            [class.active]="!isLogin">{{ isLogin ? 'افتح حساب جديد' : 'بيانات الاتصال' }}</a>
         </div>
         <div class="auth-tabs" *ngIf="currentLang === 'en'">
           <a routerLink="/login" class="auth-tab" [class.active]="isLogin">Sign In</a>

@@ -1,0 +1,24 @@
+.bg-platform1 {
+  height: 200px;
+  background:linear-gradient(rgba(8, 3, 82, 0.308)),url("/download.jfif");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: 3px 6px 8px rgba(47, 47, 54, 0.541);
+}
+.bg-platform2 {
+  height: 200px;
+  background:linear-gradient(rgba(8, 3, 82, 0.308)),url("/download\ \(1\).jfif");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: 3px 6px 8px rgba(47, 47, 54, 0.541);
+}
+.bg-platform3 {
+  height: 200px;
+  background:linear-gradient(rgba(8, 3, 82, 0.308)),url("/download.jfif");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: 3px 6px 8px rgba(47, 47, 54, 0.541);
+}

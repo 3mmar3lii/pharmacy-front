@@ -1,0 +1,10 @@
+.bg-home-list{
+  background-image: url('/CallToAction-fb1941a2.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.bg-svg{
+  width: 70px;
+  height: 70px;
+}

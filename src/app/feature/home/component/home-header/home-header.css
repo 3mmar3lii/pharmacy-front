@@ -1,0 +1,20 @@
+.bg-header{
+  background-image: url('/Background2_1-49e081ba.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+@media (max-width: 768px) {
+  .bg-header {
+    background-position: bottom;
+  }
+}
+
+h5{
+  color: #111f5e;
+}
+
+ p{
+  line-height: 1rem;
+  font-size: small;
+}

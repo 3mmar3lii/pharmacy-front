@@ -13,7 +13,7 @@ import { AuthLayoutComponent } from '../auth-layout/auth-layout.component';
 })
 export class LoginComponent {
   private fb = inject(FormBuilder);
-  
+
   // Quick reference to parent layout to access current lang
   private layout = inject(AuthLayoutComponent, { optional: true });
 
