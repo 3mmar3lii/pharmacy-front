@@ -1,4 +1,4 @@
-.custom-navbar {
+/* .custom-navbar {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
@@ -12,7 +12,7 @@
   flex-direction: column;
   align-items: center;
   color: #1e1b4b; /* Navy */
-  transition: opacity 0.2s;
+/*  transition: opacity 0.2s;
 }
 
 .nav-action-item:hover {
@@ -41,10 +41,10 @@
 .chevron-icon {
   font-size: 9px;
   color: #64748b;
-}
+}*/
 
 /* Search Box */
-.search-container {
+/*.search-container {
   width: 100%;
   max-width: 450px;
 }
@@ -55,10 +55,10 @@
   padding: 10px 45px 10px 20px;
   font-size: 14px;
   color: #1e293b;
-}
+}*/
 
 /* Bi-directional search bar padding logic */
-[dir="rtl"] .search-input {
+/*[dir="rtl"] .search-input {
   padding: 10px 20px 10px 45px;
 }
 
@@ -71,10 +71,10 @@
 
 .search-input::placeholder {
   color: #94a3b8;
-}
+}*/
 
 /* Search Icon Positioning */
-.search-icon {
+/*.search-icon {
   right: 18px;
   color: #1e1b4b;
   font-size: 15px;
@@ -83,4 +83,18 @@
 [dir="rtl"] .search-icon {
   right: auto;
   left: 18px;
+} */
+
+.dropdown-results {
+  z-index: 1000;          /* فوق كل العناصر */
+  max-height: 300px;       /* scroll لو النتائج كبيرة */
+  overflow-y: auto;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.dropdown-results div:hover {
+  background-color: #f1f1f1;
 }

@@ -1,51 +1,43 @@
-<nav class="custom-navbar bg-white py-3 border-bottom" dir="ltr">
-  <div class="container d-flex flex-wrap align-items-center justify-content-between">
-    
-    <!-- Left Group (Logo + Actions) -->
-    <div class="d-flex align-items-center gap-4 gap-lg-5 mb-3 mb-lg-0">
-      
-      <!-- Logo -->
-      <a routerLink="/home" class="brand-logo text-decoration-none">
-        <img src="image.png" alt="Pharmacy Marts" class="logo-img">
-      </a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <div class="row">
 
-      <!-- Actions -->
-      <div class="d-flex align-items-center gap-4 gap-md-5">
-        
-        <!-- Cart -->
-        <a routerLink="/cart" class="nav-action-item text-decoration-none">
-          <i class="fa-solid fa-cart-shopping nav-icon"></i>
-          <span class="action-text" [dir]="currentLang === 'ar' ? 'rtl' : 'ltr'">{{ currentLang === 'ar' ? 'العربة' : 'Cart' }}</span>
-        </a>
+      <div class="col-md-4 col-5">
+        <img routerLink="/home" src="/image.png" alt="logo" class="img-fluid ">
+      </div>
 
-        <!-- User Login -->
-        <a routerLink="/login" class="nav-action-item text-decoration-none">
-          <i class="fa-solid fa-user nav-icon"></i>
-          <span class="action-text" [dir]="currentLang === 'ar' ? 'rtl' : 'ltr'">{{ currentLang === 'ar' ? 'تسجيل الدخول' : 'Sign In' }}</span>
-        </a>
+      <div class="col-md-3 col-7 m-auto position-relative">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="filteration">
+        <!-- dropdown results -->
+        <div class="dropdown-results bg-white shadow rounded position-absolute w-100" *ngIf="filteration && filteredItems.length">
+          <div *ngFor="let item of filteredItems" class="p-2 border-bottom cursor-pointer">
+            <a [routerLink]="['/product-details', item._id]" class="text-decoration-none text-dark" (click)="closeDropdown()">
+              {{ item.title }}
+            </a>
+          </div>
+        </div>
+      </div>
 
-        <!-- Language Toggle -->
-        <div class="nav-action-item pointer" (click)="toggleLang()" style="cursor: pointer;">
-          <span class="lang-text">{{ currentLang === 'ar' ? 'EN' : 'AR' }}</span>
-          <i class="fa-solid fa-chevron-down chevron-icon"></i>
+      <div class="col-md-5 col-12 py-3 py-md-0 d-flex justify-content-md-end justify-content-center my-auto">
+
+        <a routerLink="/product" class="nav-link pe-3">Products</a>
+
+        <a routerLink="/WhishList" class="nav-link pe-3">WhishList</a>
+
+        <div class="dropdown pe-3">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            {{currentLanguage}}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" (click)="switchLanguage('EN')">EN</a>
+            <a class="dropdown-item" (click)="switchLanguage('AR')">AR</a>
+          </div>
         </div>
 
+        <i routerLink="/cart" class="fa-solid fa-cart-shopping my-auto"></i>
       </div>
-    </div>
 
-    <!-- Center/Right Nav Links -->
-    <div class="d-flex align-items-center gap-4 ms-auto me-4 fw-bold">
-      <a routerLink="/product" class="text-decoration-none text-dark">Product</a>
-      <a routerLink="/Wishlist" class="text-decoration-none text-dark">Wishlist</a>
     </div>
-
-    <!-- Right Group (Search Bar) -->
-    <div class="search-container">
-      <div class="search-box position-relative" [dir]="currentLang === 'ar' ? 'rtl' : 'ltr'">
-        <input type="text" class="form-control rounded-pill search-input" [placeholder]="currentLang === 'ar' ? 'إبحث' : 'Search'">
-        <i class="fa-solid fa-magnifying-glass search-icon position-absolute top-50 translate-middle-y"></i>
-      </div>
-    </div>
-
   </div>
 </nav>
