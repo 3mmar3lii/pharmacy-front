@@ -2,12 +2,12 @@
   <div class="container">
     <div class="row">
 
-      <div class="col-md-4 col-5">
+      <div class="col-md-3 col-5">
         <img routerLink="/home" src="/image.png" alt="logo" class="img-fluid ">
       </div>
 
       <div class="col-md-3 col-7 m-auto position-relative">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="filteration">
+        <input class="form-control me-2 rounded-pill" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="filteration">
         <!-- dropdown results -->
         <div class="dropdown-results bg-white shadow rounded position-absolute w-100" *ngIf="filteration && filteredItems.length">
           <div *ngFor="let item of filteredItems" class="p-2 border-bottom cursor-pointer">
@@ -18,7 +18,7 @@
         </div>
       </div>
 
-      <div class="col-md-5 col-12 py-3 py-md-0 d-flex justify-content-md-end justify-content-center my-auto">
+      <div class="col-md-6 col-12 py-3 py-md-0 d-flex justify-content-md-end justify-content-center my-auto">
 
         <a routerLink="/product" class="nav-link pe-3">Products</a>
 
@@ -34,6 +34,8 @@
             <a class="dropdown-item" (click)="switchLanguage('AR')">AR</a>
           </div>
         </div>
+
+        <a routerLink="/login" class="nav-link pe-3">Login</a>
 
         <i routerLink="/cart" class="fa-solid fa-cart-shopping my-auto"></i>
       </div>
