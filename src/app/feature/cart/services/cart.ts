@@ -36,27 +36,15 @@ export class CartService {
     const existingItemIndex = currentItems.findIndex(item => item.product._id === product._id);
 
     if (existingItemIndex !== -1) {
-      // Product already exists in the cart, show alert
+      // Increase quantity directly
+      currentItems[existingItemIndex].cartQuantity += 1;
+      this.saveCart(currentItems);
       Swal.fire({
-        title: 'Duplicate Medication!',
-        text: 'This medication was added by [a previous user]. Do you really want to add a new piece?',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes',
-        cancelButtonText: 'No'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // Increase quantity
-          currentItems[existingItemIndex].cartQuantity += 1;
-          this.saveCart(currentItems);
-          Swal.fire(
-            'Added!',
-            'Quantity has been increased.',
-            'success'
-          );
-        }
+        position: "top-end",
+        icon: "success",
+        title: "Quantity increased!",
+        showConfirmButton: false,
+        timer: 1500
       });
     } else {
       // Add new item
