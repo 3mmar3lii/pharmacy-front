@@ -4,6 +4,7 @@ import { Home } from './feature/home/component/home/home';
 import { ProductList } from './feature/product/component/product-list/product-list';
 import { NotFound } from './core/auth/component/not-found/not-found';
 import { ProductDetails } from './feature/product/component/product-details/product-details';
+import { CartComponent } from './feature/cart/component/cart/cart.component';
 
 export const routes: Routes = [
   {
@@ -21,6 +22,7 @@ export const routes: Routes = [
       { path: 'home', component: Home },
       { path: 'product', component: ProductList },
       { path: 'product-details/:id', component: ProductDetails },
+      { path: 'cart', component: CartComponent },
       { path: '**', component: NotFound },
     ],
   },

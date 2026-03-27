@@ -10,7 +10,8 @@
       <h5>{{productDetails.category.name}}</h5>
       <p>{{productDetails.ratingsAverage}}</p>
       <h3>{{productDetails.price}} EGP</h3>
-      <button type="button" class="btn rounded-pill w-100 mt-2 text-white">add to cart</button>
+      <button type="button" class="btn rounded-pill w-100 mt-2 text-white" (click)="addToCart(productDetails)">add to
+        cart</button>
     </div>
   </div>
 </div>
