@@ -2,10 +2,11 @@ import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../../services/products';
 import { Product } from '../../models/products';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-product-details',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './product-details.html',
   styleUrl: './product-details.css',
 })
@@ -17,7 +18,7 @@ export class ProductDetails implements OnInit {
 
   productID!: string | null;
   productDetails: Product = {} as Product;
-  cdr: any;
+  chageDetectorRef: any;
 
   ngOnInit(): void {
     // get the id from url asynchronously, then fetch product data
@@ -33,6 +34,7 @@ export class ProductDetails implements OnInit {
   }
 
   getproductDetails(id: string | null) {
+    if (!id) return;
     this.productsService.getProductDetails(id).subscribe({
       next: (res) => {
         console.log(res.data);
