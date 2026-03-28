@@ -2,11 +2,12 @@ import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../../services/products';
 import { Product } from '../../models/products';
-import { CommonModule } from '@angular/common';
+import { CartService } from '../../../cart/services/cart';
 
 @Component({
   selector: 'app-product-details',
-  imports: [CommonModule],
+  standalone: true,
+  imports: [],
   templateUrl: './product-details.html',
   styleUrl: './product-details.css',
 })
@@ -14,11 +15,16 @@ import { CommonModule } from '@angular/common';
 export class ProductDetails implements OnInit {
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly productsService = inject(ProductsService);
-  private readonly changeDetectorRef= inject(ChangeDetectorRef);
+  private readonly changeDetectorRef = inject(ChangeDetectorRef);
+  private readonly cartService = inject(CartService);
 
   productID!: string | null;
   productDetails: Product = {} as Product;
   chageDetectorRef: any;
+
+  addToCart(product: Product) {
+    this.cartService.addToCart(product);
+  }
 
   ngOnInit(): void {
     // get the id from url asynchronously, then fetch product data
