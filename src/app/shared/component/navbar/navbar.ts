@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { ProductsService } from '../../../feature/product/services/products';
 import { CommonModule } from '@angular/common';
+import { CartService } from '../../../feature/cart/services/cart';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -11,15 +13,22 @@ import { CommonModule } from '@angular/common';
   styleUrl: './navbar.css',
 })
 export class Navbar implements OnInit {
-
   allItems: any[] = [];
   filteredItems: any[] = [];
 
   private _filteration: string = '';
 
   currentLanguage: string = 'EN';
+  dir: 'ltr' | 'rtl' = 'ltr';
 
-  constructor(private productsService: ProductsService) {}
+  private readonly productsService = inject(ProductsService);
+  private readonly cartService = inject(CartService);
+
+  totalItems$ = this.cartService.cartItems$.pipe(
+    map((items) => items.reduce((acc, item) => acc + item.cartQuantity, 0)),
+  );
+
+  constructor() {}
 
   ngOnInit(): void {
     this.getData();
@@ -44,7 +53,7 @@ export class Navbar implements OnInit {
   filterItems(search: string): any[] {
     const value = search?.toLowerCase() || '';
     if (!value) return [];
-    return this.allItems.filter(item => item.title.toLowerCase().startsWith(value));
+    return this.allItems.filter((item) => item.title.toLowerCase().startsWith(value));
   }
   closeDropdown() {
     this.filteredItems = [];
@@ -52,6 +61,7 @@ export class Navbar implements OnInit {
   }
   switchLanguage(language: string) {
     this.currentLanguage = language;
-    console.log('Switched to', language);
+    this.dir = language === 'AR' ? 'rtl' : 'ltr';
+    console.log('Switched to', language, 'Direction:', this.dir);
   }
 }

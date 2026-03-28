@@ -8,13 +8,16 @@
     color: #111f59;
 }
 
-button {
-    background-color: #111f59;
+button, 
+.btn-navy {
+    background-color: #111f59 !important;
     border: none;
+    color: white !important;
 }
 
-button:hover {
-    background-color: #0b29a3;
+button:hover,
+.btn-navy:hover {
+    background-color: #0b29a3 !important;
 }
 
 button.remove-btn {
