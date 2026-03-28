@@ -1,45 +1,116 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container">
-    <div class="row">
-
-      <div class="col-md-3 col-5">
-        <img routerLink="/home" src="/image.png" alt="logo" class="img-fluid ">
-      </div>
-
-      <div class="col-md-3 col-7 m-auto position-relative">
-        <input class="form-control me-2 rounded-pill" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="filteration">
-        <!-- dropdown results -->
-        <div class="dropdown-results bg-white shadow rounded position-absolute w-100" *ngIf="filteration && filteredItems.length">
-          <div *ngFor="let item of filteredItems" class="p-2 border-bottom cursor-pointer">
-            <a [routerLink]="['/product-details', item._id]" class="text-decoration-none text-dark" (click)="closeDropdown()">
-              {{ item.title }}
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-12 py-3 py-md-0 d-flex justify-content-md-end justify-content-center my-auto">
-
-        <a routerLink="/product" class="nav-link pe-3">Products</a>
-
-        <a routerLink="/WhishList" class="nav-link pe-3">WhishList</a>
-
-        <div class="dropdown pe-3">
-          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            {{currentLanguage}}
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" (click)="switchLanguage('EN')">EN</a>
-            <a class="dropdown-item" (click)="switchLanguage('AR')">AR</a>
-          </div>
-        </div>
-
-        <a routerLink="/login" class="nav-link pe-3">Login</a>
-
-        <i routerLink="/cart" class="fa-solid fa-cart-shopping my-auto"></i>
-      </div>
-
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm py-2" [dir]="dir">
+  <div class="container-fluid px-4">
+    
+    <!-- Logo Section -->
+    <div class="navbar-brand d-flex align-items-center">
+      <img routerLink="/home" src="/image.png" alt="logo" class="logo-img cursor-pointer me-2">
     </div>
+
+    <!-- Search Section -->
+    <div class="search-container flex-grow-1 mx-4 d-none d-lg-block position-relative">
+      <div class="input-group rounded-pill overflow-hidden bg-light-gray border-0 shadow-sm">
+        <span class="input-group-text bg-transparent border-0 ps-3">
+          <i class="fa-solid fa-magnifying-glass text-muted"></i>
+        </span>
+        <input class="form-control border-0 bg-transparent py-2" 
+               type="search" 
+               [placeholder]="currentLanguage === 'EN' ? 'Search' : 'إبحث'" 
+               [(ngModel)]="filteration">
+      </div>
+      <!-- dropdown results -->
+      <div class="dropdown-results bg-white shadow rounded position-absolute w-100" *ngIf="filteration && filteredItems.length">
+        <div *ngFor="let item of filteredItems" class="p-2 border-bottom cursor-pointer">
+          <a [routerLink]="['/product-details', item._id]" class="text-decoration-none text-dark" (click)="closeDropdown()">
+            {{ item.title }}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Desktop Actions Section -->
+    <div class="d-none d-lg-flex align-items-center gap-4">
+      
+      <!-- Specialized Buttons -->
+      <div class="nav-special-buttons d-flex">
+        <button class="btn-earn-win rounded-3 px-3 py-2 d-flex align-items-center gap-2">
+          <i class="fa-solid fa-award"></i>
+          <span class="fw-bold">{{ currentLanguage === 'EN' ? 'EARN & WIN' : 'تسوق و إكسب' }}</span>
+        </button>
+      </div>
+
+      <!-- Divider line -->
+      <div class="vr mx-1 opacity-25 d-none d-xl-block" style="height: 30px;"></div>
+
+      <!-- Action Items with Icons & Labels -->
+      <div class="d-flex align-items-center gap-3">
+        
+        <!-- Language Switcher -->
+        <div class="dropdown">
+          <a class="nav-action-item dropdown-toggle text-decoration-none no-chevron" 
+             id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+            <span class="lang-text">{{ currentLanguage }}</span>
+          </a>
+          <ul class="dropdown-menu border-0 shadow-sm lang-dropdown-menu mt-2" aria-labelledby="navbarDropdown">
+            <li><div class="lang-dropdown-item" (click)="switchLanguage('EN')">EN</div></li>
+            <li class="lang-divider"></li>
+            <li><div class="lang-dropdown-item" (click)="switchLanguage('AR')">AR</div></li>
+          </ul>
+        </div>
+
+        <!-- Profile Dropdown -->
+        <div class="dropdown">
+          <a class="nav-action-item dropdown-toggle text-decoration-none no-chevron p-2" 
+             id="profileDropdown" role="button" data-bs-toggle="dropdown">
+            <i class="fa-solid fa-user nav-icon"></i>
+            <span class="action-text">{{ currentLanguage === 'EN' ? 'Profile' : 'حسابي' }}</span>
+          </a>
+          <ul class="dropdown-menu border-0 shadow-sm profile-dropdown-menu mt-2" aria-labelledby="profileDropdown">
+            <li><a class="dropdown-item py-2 d-flex align-items-center gap-2" routerLink="/my-account">
+              <i class="fa-regular fa-circle-user"></i>
+              <span>{{ currentLanguage === 'EN' ? 'My Account' : 'حسابي' }}</span>
+            </a></li>
+            <li class="lang-divider"></li>
+            <li><a class="dropdown-item py-2 d-flex align-items-center gap-2 text-danger" routerLink="/login">
+              <i class="fa-solid fa-arrow-right-from-bracket"></i>
+              <span>{{ currentLanguage === 'EN' ? 'Logout' : 'تسجيل الخروج' }}</span>
+            </a></li>
+          </ul>
+        </div>
+
+        <!-- Cart Link -->
+        <a routerLink="/cart" class="nav-action-item text-decoration-none position-relative p-2">
+          <i class="fa-solid fa-cart-shopping nav-icon"></i>
+          <span class="action-text">{{ currentLanguage === 'EN' ? 'Cart' : 'العربة' }}</span>
+          <span *ngIf="(totalItems$ | async) as total" 
+                class="cart-badge badge rounded-pill bg-danger">
+            {{ total }}
+          </span>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- Mobile Toggle (Bootstrap Default) -->
+    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
   </div>
 </nav>
+
+<!-- Green Banner (Marquee) -->
+<div class="promo-banner py-2 overflow-hidden">
+  <div class="marquee-content d-flex align-items-center gap-4">
+    <ng-container *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
+      <span class="promo-item fw-bold text-white d-flex align-items-center gap-2">
+        <i class="fa-solid fa-hand-holding-dollar fs-5"></i>
+        <span>SHOP</span>
+        <span class="dot">•</span>
+        <span>EARN</span>
+        <span class="dot">•</span>
+        <span>WIN</span>
+        <span class="dot">•</span>
+      </span>
+    </ng-container>
+  </div>
+</div>
