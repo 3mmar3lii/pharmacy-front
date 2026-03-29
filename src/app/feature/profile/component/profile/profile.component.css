@@ -1,0 +1,76 @@
+/* Variables used based on the site's apparent styling */
+:host {
+    --navy: #111f59;
+    --cyan: #00d084;
+}
+
+.site-navy-text {
+    color: var(--navy);
+}
+
+.nav-item-custom {
+    color: #64748b;
+    cursor: pointer;
+    border-left: 3px solid transparent;
+    transition: all 0.2s;
+    padding-left: 1rem;
+}
+
+.nav-item-custom:hover {
+    background-color: #f8fafc;
+    color: var(--navy);
+}
+
+.nav-item-custom.active {
+    color: var(--cyan);
+    border-left-color: var(--cyan);
+}
+
+.nav-item-custom.active h6,
+.nav-item-custom.active i {
+    color: var(--cyan) !important;
+}
+
+.edit-btn {
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.edit-btn:hover {
+    opacity: 1;
+}
+
+.edit-icon-circle {
+    width: 25px;
+    height: 25px;
+    background-color: var(--cyan);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-control-custom {
+    border: 1px solid #e2e8f0;
+    color: #1e293b;
+    font-size: 0.95rem;
+    background-color: transparent;
+}
+
+.form-control-custom:focus {
+    border-color: var(--cyan);
+    box-shadow: none;
+}
+
+.submit-btn {
+    background-color: var(--navy) !important;
+    transition: background-color 0.2s;
+}
+
+.submit-btn:hover {
+    background-color: #0b29a3 !important;
+}
+
+.address-card {
+    border-color: var(--cyan) !important;
+    background-color: #f8fafc;
+}

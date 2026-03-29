@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm py-2" [dir]="dir">
   <div class="container-fluid px-4">
-    
+
     <!-- Logo Section -->
     <div class="navbar-brand d-flex align-items-center">
       <img routerLink="/home" src="/image.png" alt="logo" class="logo-img cursor-pointer me-2">
@@ -12,15 +12,15 @@
         <span class="input-group-text bg-transparent border-0 ps-3">
           <i class="fa-solid fa-magnifying-glass text-muted"></i>
         </span>
-        <input class="form-control border-0 bg-transparent py-2" 
-               type="search" 
-               [placeholder]="currentLanguage === 'EN' ? 'Search' : 'إبحث'" 
-               [(ngModel)]="filteration">
+        <input class="form-control border-0 bg-transparent py-2" type="search"
+          [placeholder]="currentLanguage === 'EN' ? 'Search' : 'إبحث'" [(ngModel)]="filteration">
       </div>
       <!-- dropdown results -->
-      <div class="dropdown-results bg-white shadow rounded position-absolute w-100" *ngIf="filteration && filteredItems.length">
+      <div class="dropdown-results bg-white shadow rounded position-absolute w-100"
+        *ngIf="filteration && filteredItems.length">
         <div *ngFor="let item of filteredItems" class="p-2 border-bottom cursor-pointer">
-          <a [routerLink]="['/product-details', item._id]" class="text-decoration-none text-dark" (click)="closeDropdown()">
+          <a [routerLink]="['/product-details', item._id]" class="text-decoration-none text-dark"
+            (click)="closeDropdown()">
             {{ item.title }}
           </a>
         </div>
@@ -29,7 +29,7 @@
 
     <!-- Desktop Actions Section -->
     <div class="d-none d-lg-flex align-items-center gap-4">
-      
+
       <!-- Specialized Buttons -->
       <div class="nav-special-buttons d-flex">
         <button class="btn-earn-win rounded-3 px-3 py-2 d-flex align-items-center gap-2">
@@ -43,37 +43,42 @@
 
       <!-- Action Items with Icons & Labels -->
       <div class="d-flex align-items-center gap-3">
-        
+
         <!-- Language Switcher -->
         <div class="dropdown">
-          <a class="nav-action-item dropdown-toggle text-decoration-none no-chevron" 
-             id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+          <a class="nav-action-item dropdown-toggle text-decoration-none no-chevron" id="navbarDropdown" role="button"
+            data-bs-toggle="dropdown">
             <span class="lang-text">{{ currentLanguage }}</span>
           </a>
           <ul class="dropdown-menu border-0 shadow-sm lang-dropdown-menu mt-2" aria-labelledby="navbarDropdown">
-            <li><div class="lang-dropdown-item" (click)="switchLanguage('EN')">EN</div></li>
+            <li>
+              <div class="lang-dropdown-item" (click)="switchLanguage('EN')">EN</div>
+            </li>
             <li class="lang-divider"></li>
-            <li><div class="lang-dropdown-item" (click)="switchLanguage('AR')">AR</div></li>
+            <li>
+              <div class="lang-dropdown-item" (click)="switchLanguage('AR')">AR</div>
+            </li>
           </ul>
         </div>
 
         <!-- Profile Dropdown -->
         <div class="dropdown">
-          <a class="nav-action-item dropdown-toggle text-decoration-none no-chevron p-2" 
-             id="profileDropdown" role="button" data-bs-toggle="dropdown">
+          <a class="nav-action-item dropdown-toggle text-decoration-none no-chevron p-2" id="profileDropdown"
+            role="button" data-bs-toggle="dropdown">
             <i class="fa-solid fa-user nav-icon"></i>
             <span class="action-text">{{ currentLanguage === 'EN' ? 'Profile' : 'حسابي' }}</span>
           </a>
           <ul class="dropdown-menu border-0 shadow-sm profile-dropdown-menu mt-2" aria-labelledby="profileDropdown">
-            <li><a class="dropdown-item py-2 d-flex align-items-center gap-2" routerLink="/my-account">
-              <i class="fa-regular fa-circle-user"></i>
-              <span>{{ currentLanguage === 'EN' ? 'My Account' : 'حسابي' }}</span>
-            </a></li>
+            <li><a class="dropdown-item py-2 d-flex align-items-center gap-2" style="cursor: pointer;"
+                (click)="onMyAccountClick()">
+                <i class="fa-regular fa-circle-user"></i>
+                <span>{{ currentLanguage === 'EN' ? 'My Account' : 'حسابي' }}</span>
+              </a></li>
             <li class="lang-divider"></li>
             <li><a class="dropdown-item py-2 d-flex align-items-center gap-2 text-danger" routerLink="/login">
-              <i class="fa-solid fa-arrow-right-from-bracket"></i>
-              <span>{{ currentLanguage === 'EN' ? 'Logout' : 'تسجيل الخروج' }}</span>
-            </a></li>
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                <span>{{ currentLanguage === 'EN' ? 'Logout' : 'تسجيل الخروج' }}</span>
+              </a></li>
           </ul>
         </div>
 
@@ -81,8 +86,7 @@
         <a routerLink="/cart" class="nav-action-item text-decoration-none position-relative p-2">
           <i class="fa-solid fa-cart-shopping nav-icon"></i>
           <span class="action-text">{{ currentLanguage === 'EN' ? 'Cart' : 'العربة' }}</span>
-          <span *ngIf="(totalItems$ | async) as total" 
-                class="cart-badge badge rounded-pill bg-danger">
+          <span *ngIf="(totalItems$ | async) as total" class="cart-badge badge rounded-pill bg-danger">
             {{ total }}
           </span>
         </a>
