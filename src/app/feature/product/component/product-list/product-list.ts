@@ -2,10 +2,12 @@ import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Product } from '../../models/products';
 import { ProductsService } from '../../services/products';
 import { ProductCard } from "../product-card/product-card";
+import { ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-product-list',
-  imports: [ProductCard],
+  imports: [ProductCard, CommonModule],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css',
 })
@@ -13,29 +15,36 @@ import { ProductCard } from "../product-card/product-card";
   // product list component to display all products data in product card component
 export class ProductList implements OnInit {
   allProducts: Product[] = [];
+  displayedProducts: Product[] = [];
 
-  // inject products service to get products data from backend api
   private readonly ProductsService = inject(ProductsService);
-
-  // inject change detector ref to detect changes after getting products data
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
+  private readonly route = inject(ActivatedRoute);
 
-  // get all products data from backend api and assign it to allProducts variable
   getAllProduct() {
     this.ProductsService.getProducts().subscribe({
       next: (res) => {
-        console.log(res.data);
         this.allProducts = res.data;
-        this.changeDetectorRef.detectChanges();
+        this.applyFilter();
       },
-
-      error: (err) => {
-        console.log(err);
-      },
+      error: (err) => console.log(err),
     });
   }
 
-  // call getAllProduct method on component initialization to get products data and display it in product card component
+  applyFilter() {
+    this.route.queryParams.subscribe(params => {
+      const categoryId = params['category'];
+      if (categoryId && this.allProducts.length) {
+        this.displayedProducts = this.allProducts.filter(p => 
+          p.category && p.category.some((c: any) => c === categoryId || c?._id === categoryId)
+        );
+      } else {
+        this.displayedProducts = [...this.allProducts];
+      }
+      this.changeDetectorRef.detectChanges();
+    });
+  }
+
   ngOnInit(): void {
     this.getAllProduct();
   }

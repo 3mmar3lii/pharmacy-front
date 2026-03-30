@@ -17,14 +17,16 @@
 
         <!-- Image -->
         <div class="col-sm-3 text-center mb-3 mb-sm-0">
-          <img [src]="item.product.imageCover" alt="{{ item.product.title }}" class="img-fluid rounded-4"
-            style="max-height: 120px; object-fit: contain;">
+          <img [src]="item.product.image?.startsWith('http') ? item.product.image : 'http://localhost:3001/uploads/medicines/' + item.product.image" alt="medicine" class="img-fluid rounded-4"
+            style="max-height: 120px; object-fit: contain;" onerror="this.src='/image.png'">
         </div>
 
         <!-- Details -->
         <div class="col-sm-4 text-center text-sm-start">
-          <h5 class="fw-bold card-title mb-1 text-truncate" [title]="item.product.title">{{ item.product.title }}</h5>
-          <p class="text-muted small mb-2">{{ item.product.category.name || 'Category' }}</p>
+          <h5 class="fw-bold card-title mb-1 text-truncate" [title]="languageService.currentLang() === 'ar' ? item.product.nameAr : item.product.nameEn">
+            {{ languageService.currentLang() === 'ar' ? item.product.nameAr : item.product.nameEn }}
+          </h5>
+          <p class="text-muted small mb-2">{{ item.product.brand || 'Category' }}</p>
           <h5 class="fw-bold price-text">{{ item.product.price | currency : 'EGP' }}</h5>
         </div>
 

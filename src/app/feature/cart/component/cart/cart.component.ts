@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { CartService, CartItem } from '../../services/cart';
+import { inject } from '@angular/core';
+import { LanguageService } from '../../../../core/services/language.service';
 
 @Component({
     selector: 'app-cart',
@@ -12,6 +14,7 @@ import { CartService, CartItem } from '../../services/cart';
 })
 export class CartComponent implements OnInit {
     cartItems: CartItem[] = [];
+    protected readonly languageService = inject(LanguageService);
 
     constructor(private cartService: CartService) { }
 

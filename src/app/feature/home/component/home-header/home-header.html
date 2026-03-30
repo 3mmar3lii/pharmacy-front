@@ -6,66 +6,16 @@
 
 <div class="py-5">
   <div class="container ">
-    <owl-carousel-o [options]="customOptions">
-      <ng-template carouselSlide>
-        <div class="bg-body-secondary rounded-5 text-center py-4">
-          <img src="/1-drugs.png" class="w-50 d-block m-auto" alt="drugs">
-          <a href="#" class="text-black">Drugs</a>
-        </div>
-      </ng-template>
-      <ng-template carouselSlide>
-        <div class="bg-body-secondary rounded-5 text-center py-4">
-          <img src="/2-baby-care.png" class="w-50 d-block m-auto" alt="drugs">
-          <a href="#" class="text-black">Baby Care</a>
-        </div>
-      </ng-template>
-      <ng-template carouselSlide>
-        <div class="bg-body-secondary rounded-5 text-center py-4">
-          <img src="/3-man-care.png" class="w-50 d-block m-auto" alt="drugs">
-          <a href="#" class="text-black">Man Care</a>
-        </div>
-      </ng-template>
-      <ng-template carouselSlide>
-        <div class="bg-body-secondary rounded-5 text-center py-4">
-          <img src="/4-woman-care.png" class="w-50 d-block m-auto" alt="drugs">
-          <a href="#" class="text-black">Woman Care</a>
-        </div>
-      </ng-template>
-      <ng-template carouselSlide>
-        <div class="bg-body-secondary rounded-5 text-center py-4">
-          <img src="/Gomla update .png" class="w-50 d-block m-auto" alt="drugs">
-          <a href="#" class="text-black">Gomla</a>
-        </div>
-      </ng-template>
-      <ng-template carouselSlide>
-        <div class="bg-body-secondary rounded-5 text-center py-4">
-          <img src="/Home Care (1).png" class="w-50 d-block m-auto" alt="drugs">
-          <a href="#" class="text-black">Home Care</a>
-        </div>
-      </ng-template>
-      <ng-template carouselSlide>
-        <div class="bg-body-secondary rounded-5 text-center py-4">
-          <img src="/Makeup & Accessories (1).png" class="w-50 d-block m-auto" alt="drugs">
-          <a href="#" class="text-black">Makeup & Accessories</a>
-        </div>
-      </ng-template>
-      <ng-template carouselSlide>
-        <div class="bg-body-secondary rounded-5 text-center py-4">
-          <img src="/Flashoffer.jpg" class="w-50 d-block m-auto" alt="drugs">
-          <a href="#" class="text-black">Flash Offer</a>
-        </div>
-      </ng-template>
-      <ng-template carouselSlide>
-        <div class="bg-body-secondary rounded-5 text-center py-4">
-          <img src="/11-hair-care.png" class="w-50 d-block m-auto" alt="drugs">
-          <a href="#" class="text-black">Hair Care</a>
-        </div>
-      </ng-template>
-      <ng-template carouselSlide>
-        <div class="bg-body-secondary rounded-5 text-center py-4">
-          <img src="/12-skin-care.png" class="w-50 d-block m-auto" alt="drugs">
-          <a href="#" class="text-black">Skin Care</a>
-        </div>
+    <owl-carousel-o [options]="customOptions" *ngIf="categories.length > 0">
+      <ng-template carouselSlide *ngFor="let cat of categories; let i = index">
+        <a [routerLink]="['/product']" [queryParams]="{ category: cat._id }" class="text-decoration-none">
+          <div class="bg-body-secondary rounded-5 text-center py-4 px-2" style="cursor: pointer; transition: transform 0.2s; min-height: 180px;">
+            <img [src]="getImage(i)" class="w-50 d-block m-auto mb-3" alt="category" onerror="this.src='/1-drugs.png'">
+            <span class="text-black fw-bold d-block text-truncate w-100">
+              {{ languageService.currentLang() === 'ar' ? cat.nameAr : cat.nameEn }}
+            </span>
+          </div>
+        </a>
       </ng-template>
     </owl-carousel-o>
   </div>

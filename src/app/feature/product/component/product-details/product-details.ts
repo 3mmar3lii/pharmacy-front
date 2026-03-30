@@ -4,6 +4,7 @@ import { ProductsService } from '../../services/products';
 import { Product } from '../../models/products';
 import { CartService } from '../../../cart/services/cart';
 import { CommonModule } from '@angular/common';
+import { LanguageService } from '../../../../core/services/language.service';
 
 @Component({
   selector: 'app-product-details',
@@ -22,6 +23,17 @@ export class ProductDetails implements OnInit {
   productID!: string | null;
   productDetails: Product = {} as Product;
   chageDetectorRef: any;
+
+  protected readonly languageService = inject(LanguageService);
+
+  get localizedName(): string {
+    return this.languageService.currentLang() === 'ar' ? this.productDetails?.nameAr : this.productDetails?.nameEn;
+  }
+
+  get imageUrl(): string {
+    if (!this.productDetails?.image) return '/image.png';
+    return this.productDetails.image.startsWith('http') ? this.productDetails.image : `http://localhost:3001/uploads/medicines/${this.productDetails.image}`;
+  }
 
   addToCart(product: Product) {
     this.cartService.addToCart(product);
