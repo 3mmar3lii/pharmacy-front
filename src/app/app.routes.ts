@@ -6,6 +6,7 @@ import { NotFound } from './core/auth/component/not-found/not-found';
 import { ProductDetails } from './feature/product/component/product-details/product-details';
 import { CartComponent } from './feature/cart/component/cart/cart.component';
 import { ProfileComponent } from './feature/profile/component/profile/profile.component';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -28,6 +29,7 @@ export const routes: Routes = [
   {
     path: '',
     component: User,
+    canActivate: [authGuard],
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: Home },
