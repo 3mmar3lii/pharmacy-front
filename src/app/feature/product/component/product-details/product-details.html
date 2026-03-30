@@ -1,14 +1,14 @@
 <div class="container my-5" *ngIf="productDetails">
   <div class="row">
     <div class="col-sm-4 bg-white rounded-5 overflow-hidden">
-      <img [src]="productDetails.imageCover" class="img-fluid" alt="">
+      <img [src]="imageUrl" class="img-fluid" alt="{{ localizedName }}" onerror="this.src='/image.png'">
     </div>
     <div class="col-sm-1"></div>
     <div class="col-sm-7 bg-white rounded-5 overflow-hidden px-3 py-sm-3 py-md-0 h-auto align-content-center">
-      <h2>{{productDetails.title}}</h2>
+      <h2>{{ localizedName }}</h2>
       <hr>
-      <h5>{{productDetails.category.name}}</h5>
-      <p>{{productDetails.ratingsAverage}}</p>
+      <h5>{{productDetails.brand}}</h5>
+      <p>{{productDetails.description}}</p>
       <h3>{{productDetails.price}} EGP</h3>
       <button type="button" class="btn rounded-pill w-100 mt-2 text-white" (click)="addToCart(productDetails)">add to
         cart</button>

@@ -34,7 +34,7 @@ export class Navbar implements OnInit {
   }
 
   totalItems$ = this.cartService.cartItems$.pipe(
-    map((items) => items.reduce((acc, item) => acc + item.cartQuantity, 0)),
+    map((items) => items.reduce((acc, item) => acc + item.quantity, 0)),
   );
 
   constructor() { }
@@ -62,7 +62,10 @@ export class Navbar implements OnInit {
   filterItems(search: string): any[] {
     const value = search?.toLowerCase() || '';
     if (!value) return [];
-    return this.allItems.filter((item) => item.title.toLowerCase().startsWith(value));
+    return this.allItems.filter((item) => 
+      item.nameEn?.toLowerCase().includes(value) || 
+      item.nameAr?.toLowerCase().includes(value)
+    );
   }
   closeDropdown() {
     this.filteredItems = [];

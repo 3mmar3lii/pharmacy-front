@@ -17,14 +17,16 @@
 
         <!-- Image -->
         <div class="col-sm-3 text-center mb-3 mb-sm-0">
-          <img [src]="item.product.imageCover" alt="{{ item.product.title }}" class="img-fluid rounded-4"
-            style="max-height: 120px; object-fit: contain;">
+          <img [src]="item.product.image.startsWith('http') ? item.product.image : 'http://localhost:3001/uploads/medicines/' + item.product.image" alt="medicine" class="img-fluid rounded-4"
+            style="max-height: 120px; object-fit: contain;" onerror="this.src='/image.png'">
         </div>
 
         <!-- Details -->
         <div class="col-sm-4 text-center text-sm-start">
-          <h5 class="fw-bold card-title mb-1 text-truncate" [title]="item.product.title">{{ item.product.title }}</h5>
-          <p class="text-muted small mb-2">{{ item.product.category.name || 'Category' }}</p>
+          <h5 class="fw-bold card-title mb-1 text-truncate" [title]="languageService.currentLang() === 'ar' ? item.product.nameAr : item.product.nameEn">
+            {{ languageService.currentLang() === 'ar' ? item.product.nameAr : item.product.nameEn }}
+          </h5>
+          <p class="text-muted small mb-2">{{ item.product.brand || 'Category' }}</p>
           <h5 class="fw-bold price-text">{{ item.product.price | currency : 'EGP' }}</h5>
         </div>
 
@@ -34,22 +36,38 @@
 
           <div class="d-flex align-items-center mb-3">
             <button type="button" class="btn text-white rounded-pill px-3 py-1"
-              (click)="increaseQuantity(item.product._id)">
+              (click)="increaseQuantity(item.product._id, item._id)">
               <i class="fas fa-plus"></i>
             </button>
-            <span class="fw-bold mx-3 fs-5">{{ item.cartQuantity }}</span>
+            <span class="fw-bold mx-3 fs-5">{{ item.quantity }}</span>
             <button type="button" class="btn text-white rounded-pill px-3 py-1"
-              (click)="decreaseQuantity(item.product._id)">
-              <i class="fas" [ngClass]="item.cartQuantity > 1 ? 'fa-minus' : 'fa-trash-alt'"></i>
+              (click)="decreaseQuantity(item.product._id, item._id)">
+              <i class="fas" [ngClass]="item.quantity > 1 ? 'fa-minus' : 'fa-trash-alt'"></i>
             </button>
           </div>
 
           <h5 class="fw-bold total-text mb-2 text-center text-sm-end w-100">
-            Total: {{ (item.product.price * item.cartQuantity) | currency : 'EGP' }}
+            Total: {{ (item.product.price * item.quantity) | currency : 'EGP' }}
           </h5>
 
+          <!-- Prescription UI Conditional Block -->
+          <div *ngIf="item.requiresPrescription" class="w-100 mt-2">
+            <!-- Hidden File Input -->
+            <input type="file" [id]="'upload-prescription-' + item._id" accept="image/*" class="d-none" (change)="onFileSelected($event, item._id)">
+            
+            <!-- Upload Trigger Button -->
+            <button *ngIf="!item.hasPrescription" type="button" class="btn rounded-pill w-100 bg-warning text-dark fw-bold" (click)="triggerFileInput(item._id)">
+              <i class="fas fa-file-medical me-1"></i> Upload Prescription
+            </button>
+            
+            <!-- Success Badge -->
+            <div *ngIf="item.hasPrescription" class="badge bg-success w-100 rounded-pill py-2">
+              <i class="fas fa-check-circle me-1"></i> Prescription Attached
+            </div>
+          </div>
+
           <button type="button" class="btn text-white rounded-pill w-100 mt-2 bg-danger remove-btn"
-            (click)="removeItem(item.product._id)">
+            (click)="removeItem(item.product._id, item._id)">
             Remove
           </button>
         </div>
@@ -89,7 +107,7 @@
           <h3 class="fw-bold price-text mb-0">{{ totalPrice | currency : 'EGP' }}</h3>
         </div>
 
-        <button type="button" class="btn rounded-pill w-100 mt-2 text-white py-2" [disabled]="cartItems.length === 0">
+        <button type="button" class="btn rounded-pill w-100 mt-2 text-white py-2" [disabled]="cartItems.length === 0" (click)="checkoutCart()">
           Checkout
         </button>
       </div>
