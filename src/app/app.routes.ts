@@ -6,6 +6,7 @@ import { NotFound } from './core/auth/component/not-found/not-found';
 import { ProductDetails } from './feature/product/component/product-details/product-details';
 import { CartComponent } from './feature/cart/component/cart/cart.component';
 import { ProfileComponent } from './feature/profile/component/profile/profile.component';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -23,11 +24,22 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./auth/register/register.component').then((m) => m.RegisterComponent),
       },
+      {
+        path: 'forgot-password',
+        loadComponent: () =>
+          import('./auth/forgot-password/forgot-password.component').then((m) => m.ForgotPasswordComponent),
+      },
+      {
+        path: 'reset-password',
+        loadComponent: () =>
+          import('./auth/reset-password/reset-password.component').then((m) => m.ResetPasswordComponent),
+      },
     ],
   },
   {
     path: '',
     component: User,
+    canActivate: [authGuard],
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: Home },

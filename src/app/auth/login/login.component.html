@@ -13,7 +13,7 @@
       <label class="input-label">{{ currentLang === 'ar' ? 'كلمة السر' : 'Password' }}</label>
       <input type="password" formControlName="password" />
       <div class="forgot-password text-end mt-2">
-        <a href="javascript:void(0)">{{ currentLang === 'ar' ? 'نسيت كلمة السر؟' : 'Forgot Password?' }}</a>
+        <a routerLink="/forgot-password">{{ currentLang === 'ar' ? 'نسيت كلمة السر؟' : 'Forgot Password?' }}</a>
       </div>
     </div>
 
