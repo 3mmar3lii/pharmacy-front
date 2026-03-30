@@ -1,10 +1,11 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { ProductsService } from '../../../feature/product/services/products';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../../../feature/cart/services/cart';
 import { map } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-navbar',
@@ -23,12 +24,13 @@ export class Navbar implements OnInit {
 
   private readonly productsService = inject(ProductsService);
   private readonly cartService = inject(CartService);
+  private readonly router = inject(Router);
 
   totalItems$ = this.cartService.cartItems$.pipe(
     map((items) => items.reduce((acc, item) => acc + item.cartQuantity, 0)),
   );
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
     this.getData();
@@ -63,5 +65,29 @@ export class Navbar implements OnInit {
     this.currentLanguage = language;
     this.dir = language === 'AR' ? 'rtl' : 'ltr';
     console.log('Switched to', language, 'Direction:', this.dir);
+  }
+
+  onMyAccountClick() {
+    // Assuming no token/session exists for the user currently
+    const hasAccount = false;
+
+    if (hasAccount) {
+      this.router.navigate(['/profile']);
+    } else {
+      Swal.fire({
+        title: this.currentLanguage === 'EN' ? 'No Account Found' : 'لا يوجد حساب',
+        text: this.currentLanguage === 'EN' ? 'You don\'t have an account. Create now?' : 'ليس لديك حساب. هل تود إنشاء حساب الآن؟',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#111f59',
+        cancelButtonColor: '#dc3545',
+        confirmButtonText: this.currentLanguage === 'EN' ? 'Yes' : 'نعم',
+        cancelButtonText: this.currentLanguage === 'EN' ? 'No' : 'لا'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigate(['/login']);
+        }
+      });
+    }
   }
 }

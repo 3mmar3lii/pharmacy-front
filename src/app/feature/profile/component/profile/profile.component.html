@@ -1,0 +1,232 @@
+<div class="container my-5">
+    <div class="row gx-4">
+        <!-- Sidebar -->
+        <div class="col-md-3 mb-4 mb-md-0">
+            <div class="bg-white rounded-5 shadow-sm p-4 h-100 sidebar-card">
+
+                <div class="mb-4">
+                    <h5 class="fw-bold mb-1 site-navy-text">{{ pharmacyOwnerName || 'User Name' }}</h5>
+                    <p class="text-muted small mb-0">{{ mobileNumber || 'Phone Number' }}</p>
+                </div>
+
+                <div class="nav flex-column sidebar-nav">
+                    <!-- Orders -->
+                    <a class="nav-link nav-item-custom mb-3" [class.active]="activeTab === 'orders'"
+                        (click)="setActiveTab('orders')">
+                        <div class="d-flex align-items-center mb-1">
+                            <i class="fas fa-shopping-cart me-2"></i>
+                            <h6 class="mb-0 fw-bold">Orders</h6>
+                        </div>
+                        <small class="text-muted d-block ps-4">Everything About Your Orders</small>
+                    </a>
+
+                    <hr class="my-2 border-light">
+
+                    <!-- My Information -->
+                    <a class="nav-link nav-item-custom mb-3 mt-2" [class.active]="activeTab === 'info'"
+                        (click)="setActiveTab('info')">
+                        <div class="d-flex align-items-center mb-1">
+                            <i class="fas fa-address-card me-2"></i>
+                            <h6 class="mb-0 fw-bold">My Information</h6>
+                        </div>
+                        <small class="text-muted d-block ps-4">Login and Pharmacy Information</small>
+                    </a>
+
+                    <hr class="my-2 border-light">
+
+                    <!-- Address Book -->
+                    <a class="nav-link nav-item-custom mt-2" [class.active]="activeTab === 'addresses'"
+                        (click)="setActiveTab('addresses')">
+                        <div class="d-flex align-items-center mb-1">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            <h6 class="mb-0 fw-bold">Address Book</h6>
+                        </div>
+                        <small class="text-muted d-block ps-4">Manage Your Addresses</small>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="col-md-9">
+            <!-- 1. Orders Tab -->
+            <div *ngIf="activeTab === 'orders'">
+                <div class="bg-white rounded-5 shadow-sm p-4 mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h5 class="fw-bold mb-0 site-navy-text">
+                            <i class="fas fa-shopping-cart me-2"></i> Orders
+                        </h5>
+                        <select
+                            class="form-select form-select-sm w-auto rounded-pill border-light fw-bold text-muted px-4"
+                            style="cursor: pointer;">
+                            <option>LAST MONTH</option>
+                            <option>THIS MONTH</option>
+                            <option>LAST 3 MONTHS</option>
+                        </select>
+                    </div>
+
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="p-4 border border-light rounded-4 text-center">
+                                <h3 class="fw-bold mb-1 site-navy-text">{{ totalSalesValue }}</h3>
+                                <p class="text-muted small mb-0">Total Sales value</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-4 border border-light rounded-4 text-center">
+                                <h3 class="fw-bold mb-1 site-navy-text">{{ numberOfOrders }}</h3>
+                                <p class="text-muted small mb-0">Number of orders</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-4 border border-light rounded-4 text-center">
+                                <h3 class="fw-bold mb-1 site-navy-text">{{ averageOrderValue }}</h3>
+                                <p class="text-muted small mb-0">Average Order value</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. My Information Tab -->
+            <div *ngIf="activeTab === 'info'">
+                <div class="bg-white rounded-5 shadow-sm p-5 position-relative">
+                    <h5 class="fw-bold mb-4 site-navy-text d-flex align-items-center">
+                        <i class="fas fa-address-card me-2"></i> My Information
+                    </h5>
+
+                    <!-- Edit Button (Floating Right) -->
+                    <button
+                        class="btn btn-link edit-btn position-absolute top-0 end-0 mt-4 me-4 d-flex flex-column align-items-center justify-content-center text-decoration-none">
+                        <div class="edit-icon-circle rounded-circle mb-1">
+                            <i class="fas fa-pen text-white small"></i>
+                        </div>
+                        <small class="text-muted" style="font-size: 0.75rem;">edit</small>
+                    </button>
+
+                    <div class="row mt-4">
+                        <div class="col-md-6 border-end pe-4">
+                            <div class="mb-4">
+                                <p class="fw-bold site-navy-text mb-1 small">Pharmacy Name</p>
+                                <p class="text-muted small">{{ pharmacyName }}</p>
+                            </div>
+                            <div class="mb-4">
+                                <p class="fw-bold site-navy-text mb-1 small">Pharmacy Owner Name</p>
+                                <p class="text-muted small">{{ pharmacyOwnerName }}</p>
+                            </div>
+                            <div class="mb-4">
+                                <p class="fw-bold site-navy-text mb-1 small">WhatsApp Number</p>
+                                <p class="text-muted small">{{ whatsappNumber }}</p>
+                            </div>
+                            <div>
+                                <p class="fw-bold site-navy-text mb-1 small">Pharmacy's Landline Number</p>
+                                <p class="text-muted small">{{ landlineNumber }}</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 ps-md-4 mt-4 mt-md-0">
+                            <div class="mb-4">
+                                <p class="fw-bold site-navy-text mb-1 small">Email</p>
+                                <p class="text-muted small">{{ email }}</p>
+                            </div>
+                            <div class="mb-4">
+                                <p class="fw-bold site-navy-text mb-1 small">Pharmacy Type</p>
+                                <p class="text-muted small">{{ pharmacyType }}</p>
+                            </div>
+                            <div>
+                                <p class="fw-bold site-navy-text mb-1 small">Mobile Number (Used to Sign-in)</p>
+                                <p class="text-muted small">{{ mobileNumber }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Address Book Tab -->
+            <div *ngIf="activeTab === 'addresses'">
+
+                <!-- New Delivery Address Form -->
+                <div class="bg-white rounded-5 shadow-sm p-4 mb-4">
+                    <h5 class="fw-bold mb-4 site-navy-text d-flex align-items-center">
+                        <i class="fas fa-map-marker-alt me-2"></i> New Delivery Address
+                    </h5>
+
+                    <form class="row border-start ms-2 ms-md-5 ps-3 ps-md-4 border-light mt-3">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <select class="form-select rounded-pill px-3 py-2 text-muted form-control-custom">
+                                    <option selected>Governorate</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <select class="form-select rounded-pill px-3 py-2 text-muted form-control-custom">
+                                    <option selected>City</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control rounded-pill px-3 py-2 form-control-custom"
+                                    placeholder="Street Name">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control rounded-pill px-3 py-2 form-control-custom"
+                                    placeholder="Building No">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control rounded-pill px-3 py-2 form-control-custom"
+                                    placeholder="Landmark">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 ps-md-4 mt-4 mt-md-0 position-relative">
+                            <div class="d-none d-md-block position-absolute h-75 border-start border-light"
+                                style="left: 0; top: 12.5%;"></div>
+                            <div class="mb-3 ms-md-3">
+                                <input type="text" class="form-control rounded-pill px-3 py-2 form-control-custom"
+                                    placeholder="Pharmacy/Branch Name">
+                            </div>
+                            <div class="mb-3 ms-md-3">
+                                <input type="text" class="form-control rounded-pill px-3 py-2 form-control-custom"
+                                    placeholder="Contact Person Name">
+                            </div>
+                            <div class="mb-3 ms-md-3">
+                                <input type="text" class="form-control rounded-pill px-3 py-2 form-control-custom"
+                                    placeholder="Contact Person Number">
+                            </div>
+                            <div class="text-start text-md-center mt-5 ms-md-3">
+                                <button type="button"
+                                    class="btn btn-navy text-white rounded-pill px-5 py-2 fw-semibold submit-btn">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Saved Addresses -->
+                <div class="bg-white rounded-5 shadow-sm p-4">
+                    <h5 class="fw-bold mb-4 site-navy-text d-flex align-items-center" style="opacity: 0.85;">
+                        <span class="rounded-circle d-inline-block me-2 border"
+                            style="width: 14px; height: 14px; background-color: #e2e8f0;"></span> Address Book
+                    </h5>
+
+                    <div *ngIf="savedAddresses.length > 0; else noAddresses">
+                        <div class="p-3 border rounded-4 position-relative address-card ms-2 ms-md-4 mb-3"
+                            *ngFor="let address of savedAddresses">
+                            <button
+                                class="btn btn-link position-absolute top-0 end-0 text-muted border-0 p-2 mt-2 me-2">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                            <h6 class="fw-bold site-navy-text mb-1">{{ address.title }}</h6>
+                            <p class="text-muted small mb-1">{{ address.details }}</p>
+                            <p class="text-muted small mb-0">{{ address.name }}<br>{{ address.phone }}</p>
+                        </div>
+                    </div>
+
+                    <ng-template #noAddresses>
+                        <p class="text-muted text-center mt-3 ms-md-4">You have no saved addresses yet.</p>
+                    </ng-template>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
