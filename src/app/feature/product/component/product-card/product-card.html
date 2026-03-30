@@ -1,12 +1,39 @@
-<div class="card  rounded-5 mt-3 p-2 bg-white" style="cursor: pointer;">
+<div class="card rounded-5 mt-3 mb-5 p-3 bg-white d-flex flex-column border-0" style="cursor: pointer; box-shadow: 0 2px 15px rgba(0,0,0,0.06);">
 
-  <div [routerLink]="['/product-details',product._id]">
-    <img [src]="product.imageCover" class="card-img-top img-fluid" alt="product.title">
-    <h5 class="card-title text-truncate">{{product.category.name}}</h5>
-    <p class="card-text text-truncate">{{product.title}}</p>
-    <span class="fw-bold">{{product.price}} EGP</span>
+  <div [routerLink]="['/product-details', product._id]" class="d-flex flex-column text-center flex-grow-1">
+    
+    <!-- Fixed Image Container -->
+    <div class="w-100 d-flex justify-content-center align-items-center mb-3" style="height: 160px;">
+      <img [src]="imageUrl" class="img-fluid" style="max-height: 100%; max-width: 100%; object-fit: contain;" alt="medicine" onerror="this.src='/image.png'">
+    </div>
+    
+    <h6 class="card-title text-truncate fw-bold mb-3" style="color: #111f59;">{{ localizedName }}</h6>
+    
+    <!-- Push everything below to the bottom using mt-auto -->
+    <div class="mt-auto flex-column d-flex align-items-center w-100">
+      
+      <!-- Auth Checked Price -->
+      <div *ngIf="isLoggedIn; else loginToSeePrice" class="mb-2">
+        <span class="fw-bold" style="color: #0b5ed7; font-size: 1.2rem;">{{ product.price }} EGP</span>
+      </div>
+      
+      <ng-template #loginToSeePrice>
+        <div class="mb-2 text-muted small fw-semibold">
+          {{ languageService.currentLang() === 'ar' ? 'تحتاج إلى تسجيل الدخول لرؤية السعر' : 'you need to login to see the price' }}
+        </div>
+      </ng-template>
+
+      <!-- Prescription Required Red Flag -->
+      <div *ngIf="product.requiresPrescription" class="mt-1 w-100 text-center">
+        <span class="text-danger" style="font-size: 0.85rem; font-weight: 900; letter-spacing: 0.5px;">
+          {{ languageService.currentLang() === 'ar' ? 'يحتاج وصفة طبية !' : 'Requires Prescription !' }}
+        </span>
+      </div>
+    </div>
   </div>
 
-  <button type="button" class="btn rounded-pill w-100 my-3 text-white" (click)="addToCart(product)">add to cart</button>
+  <button *ngIf="isLoggedIn" type="button" class="btn rounded-pill w-100 mt-3 text-white fw-bold" style="background-color: var(--primary-cyan) !important;" (click)="addToCart(product)">
+    {{ languageService.currentLang() === 'ar' ? 'أضف إلى العربة' : 'Add to cart' }}
+  </button>
 
 </div>

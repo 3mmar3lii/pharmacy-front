@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthLayoutComponent } from '../auth-layout/auth-layout.component';
 
 @Component({
@@ -17,6 +18,7 @@ export class LoginComponent {
   private fb = inject(FormBuilder);
   private http = inject(HttpClient);
   private router = inject(Router);
+  private toastr = inject(ToastrService);
 
   // Quick reference to parent layout to access current lang
   private layout = inject(AuthLayoutComponent, { optional: true });
@@ -45,10 +47,12 @@ export class LoginComponent {
           if (response.token) {
             document.cookie = `token=${response.token}; path=/; max-age=2592000; SameSite=Lax`;
           }
+          this.toastr.success(this.currentLang === 'ar' ? 'تم تسجيل الدخول بنجاح!' : 'Logged in successfully!');
           this.router.navigate(['/home']); // or somewhere else upon success
         },
         error: (err) => {
           console.error('Login failed', err);
+          this.toastr.error(err.error?.message || (this.currentLang === 'ar' ? 'فشل تسجيل الدخول' : 'Login failed'));
         }
       });
     }

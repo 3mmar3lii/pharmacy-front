@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink, Router } from '@angular/router';
 import { ProductsService } from '../../../feature/product/services/products';
 import { CommonModule } from '@angular/common';
+import { LanguageService } from '../../../core/services/language.service';
 import { CartService } from '../../../feature/cart/services/cart';
 import { map } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -19,12 +20,18 @@ export class Navbar implements OnInit {
 
   private _filteration: string = '';
 
-  currentLanguage: string = 'EN';
-  dir: 'ltr' | 'rtl' = 'ltr';
-
+  protected readonly languageService = inject(LanguageService);
   private readonly productsService = inject(ProductsService);
   private readonly cartService = inject(CartService);
   private readonly router = inject(Router);
+
+  get currentLanguage() {
+    return this.languageService.currentLang() === 'en' ? 'EN' : 'AR';
+  }
+
+  get dir() {
+    return this.languageService.dir();
+  }
 
   totalItems$ = this.cartService.cartItems$.pipe(
     map((items) => items.reduce((acc, item) => acc + item.cartQuantity, 0)),
@@ -62,9 +69,7 @@ export class Navbar implements OnInit {
     this.filteration = '';
   }
   switchLanguage(language: string) {
-    this.currentLanguage = language;
-    this.dir = language === 'AR' ? 'rtl' : 'ltr';
-    console.log('Switched to', language, 'Direction:', this.dir);
+    this.languageService.setLanguage(language === 'AR' ? 'ar' : 'en');
   }
 
   onMyAccountClick() {
