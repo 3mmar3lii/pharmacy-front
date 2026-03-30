@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 import { AuthLayoutComponent } from '../auth-layout/auth-layout.component';
 
 @Component({
@@ -14,6 +15,7 @@ import { AuthLayoutComponent } from '../auth-layout/auth-layout.component';
 export class RegisterComponent {
   private fb = inject(FormBuilder);
   private router = inject(Router);
+  private http = inject(HttpClient);
 
   private layout = inject(AuthLayoutComponent, { optional: true });
 
@@ -40,7 +42,20 @@ export class RegisterComponent {
       return;
     }
     if (this.registerForm.valid) {
-      console.log('Register Form Value:', this.registerForm.value);
+      const formValue = this.registerForm.value;
+      
+      this.http.post('http://localhost:3001/api/v1/users/signup', formValue, { withCredentials: true }).subscribe({
+        next: (response: any) => {
+          console.log('Register success:', response);
+          if (response.token) {
+            document.cookie = `token=${response.token}; path=/; max-age=2592000; SameSite=Lax`;
+          }
+          this.router.navigate(['/']); // or somewhere else upon success
+        },
+        error: (err) => {
+          console.error('Registration failed', err);
+        }
+      });
     }
   }
 

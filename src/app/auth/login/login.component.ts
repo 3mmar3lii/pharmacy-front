@@ -2,6 +2,8 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // import { RouterLink } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { AuthLayoutComponent } from '../auth-layout/auth-layout.component';
 
 @Component({
@@ -13,6 +15,8 @@ import { AuthLayoutComponent } from '../auth-layout/auth-layout.component';
 })
 export class LoginComponent {
   private fb = inject(FormBuilder);
+  private http = inject(HttpClient);
+  private router = inject(Router);
 
   // Quick reference to parent layout to access current lang
   private layout = inject(AuthLayoutComponent, { optional: true });
@@ -28,7 +32,25 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.loginForm.valid) {
-      console.log('Form Value:', this.loginForm.value);
+      const formValue = this.loginForm.value;
+      
+      const payload = {
+        email: formValue.username, // map username to email for backend
+        password: formValue.password
+      };
+
+      this.http.post('http://localhost:3001/api/v1/users/login', payload, { withCredentials: true }).subscribe({
+        next: (response: any) => {
+          console.log('Login success:', response);
+          if (response.token) {
+            document.cookie = `token=${response.token}; path=/; max-age=2592000; SameSite=Lax`;
+          }
+          this.router.navigate(['/home']); // or somewhere else upon success
+        },
+        error: (err) => {
+          console.error('Login failed', err);
+        }
+      });
     }
   }
 }
