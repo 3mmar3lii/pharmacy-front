@@ -1,7 +1,7 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Product } from '../../product/models/products';
-import Swal from 'sweetalert2';
+import { ToastrService } from 'ngx-toastr';
 
 export interface CartItem {
   product: Product;
@@ -15,7 +15,7 @@ export class CartService {
   private cartItemsSubject = new BehaviorSubject<CartItem[]>(this.loadCart());
   cartItems$ = this.cartItemsSubject.asObservable();
 
-  constructor() { }
+  constructor(private toastr: ToastrService) { }
 
   private loadCart(): CartItem[] {
     const savedCart = localStorage.getItem('cart');
@@ -39,24 +39,12 @@ export class CartService {
       // Increase quantity directly
       currentItems[existingItemIndex].cartQuantity += 1;
       this.saveCart(currentItems);
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "Quantity increased!",
-        showConfirmButton: false,
-        timer: 1500
-      });
+      this.toastr.info('Quantity increased!', '', { timeOut: 2000 });
     } else {
       // Add new item
       currentItems.push({ product, cartQuantity: 1 });
       this.saveCart(currentItems);
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "Medication added to cart!",
-        showConfirmButton: false,
-        timer: 1500
-      });
+      this.toastr.info('Medication added to cart!', '', { timeOut: 2000 });
     }
   }
 
@@ -85,6 +73,7 @@ export class CartService {
   removeItem(productId: string) {
     const currentItems = this.getCartItems().filter(i => i.product._id !== productId);
     this.saveCart(currentItems);
+    this.toastr.error('Item removed from cart', '', { timeOut: 2000 });
   }
 
   clearCart() {

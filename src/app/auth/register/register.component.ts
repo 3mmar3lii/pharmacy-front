@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 import { AuthLayoutComponent } from '../auth-layout/auth-layout.component';
 
 @Component({
@@ -16,6 +17,7 @@ export class RegisterComponent {
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private http = inject(HttpClient);
+  private toastr = inject(ToastrService);
 
   private layout = inject(AuthLayoutComponent, { optional: true });
 
@@ -50,10 +52,12 @@ export class RegisterComponent {
           if (response.token) {
             document.cookie = `token=${response.token}; path=/; max-age=2592000; SameSite=Lax`;
           }
+          this.toastr.success(this.currentLang === 'ar' ? 'تم إنشاء الحساب بنجاح!' : 'Account created successfully!');
           this.router.navigate(['/']); // or somewhere else upon success
         },
         error: (err) => {
           console.error('Registration failed', err);
+          this.toastr.error(err.error?.message || (this.currentLang === 'ar' ? 'فشل التسجيل' : 'Registration failed'));
         }
       });
     }

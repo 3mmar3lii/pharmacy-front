@@ -9,10 +9,10 @@ export class ProductsService  {
 
   constructor(private http: HttpClient) {}
   getProducts():Observable<any> {
-    return this.http.get<{ data: any[] }>('https://ecommerce.routemisr.com/api/v1/products');
+    return this.http.get<{ data: any[] }>('http://localhost:3001/api/v1/medicines');
   }
   getProductDetails(id:string|null):Observable<any> {
-    return this.http.get(`https://ecommerce.routemisr.com/api/v1/products/${id}`);
+    return this.http.get(`http://localhost:3001/api/v1/medicines/${id}`);
   }
   }
 
