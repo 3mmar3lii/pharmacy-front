@@ -21,7 +21,7 @@
         <div *ngFor="let item of filteredItems" class="p-2 border-bottom cursor-pointer">
           <a [routerLink]="['/product-details', item._id]" class="text-decoration-none text-dark"
             (click)="closeDropdown()">
-            {{ item.title }}
+            {{ currentLanguage === 'EN' ? item.nameEn : item.nameAr }}
           </a>
         </div>
       </div>
